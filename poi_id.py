@@ -209,7 +209,8 @@ print 'tree_important_features_list :',tree_important_features_list
 # features_list = tree_important_features_list
 
 # Use SelectBest to select features
-selector = SelectKBest(k=6).fit(features_train, labels_train)
+selector = SelectKBest(k=4).fit(features_train, labels_train)
+
 def get_new_features(selector,features_list):
     new_features = []
     for bool, feature in zip(selector.get_support(), features_list):
@@ -224,7 +225,10 @@ features_list = get_new_features(selector,features_list)
 parameters = {'min_samples_split': [2,5,10,20,30],'max_depth': range(1,5),'class_weight':[None,'balanced']}
 cv = StratifiedShuffleSplit(labels,1000,random_state=18)
 clf_tree = GridSearchCV(DecisionTreeClassifier(),parameters,cv=10,scoring='f1')
+data = featureFormat(my_dataset, features_list, sort_keys=True)
+labels, features = targetFeatureSplit(data)
 clf_tree.fit(features,labels)
+
 print clf_tree.best_params_
 print clf_tree.best_estimator_
 
@@ -234,8 +238,9 @@ print clf_tree.best_estimator_
 ### that the version of poi_id.py that you submit can be run on its own and
 ### generates the necessary .pkl files for validating your results.
 
+# clf = DecisionTreeClassifier()
+clf = DecisionTreeClassifier(min_samples_split= 20 , max_depth= 3,class_weight = 'balanced')
 
-clf = DecisionTreeClassifier(min_samples_split= 2 , max_depth= 2,class_weight = 'balanced')
 dump_classifier_and_data(clf,my_dataset,features_list)
 print main()
 print features_list

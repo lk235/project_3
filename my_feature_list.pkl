@@ -7,8 +7,4 @@ aS'bonus'
 p3
 aS'expenses'
 p4
-aS'other'
-p5
-aS'fraction_from_poi'
-p6
 a.

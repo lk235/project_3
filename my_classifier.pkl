@@ -37,7 +37,7 @@ p16
 I1
 sS'min_samples_split'
 p17
-I2
+I20
 sS'random_state'
 p18
 NsS'criterion'
@@ -57,7 +57,7 @@ S'0.18.1'
 p25
 sS'max_depth'
 p26
-I2
+I3
 sS'class_weight'
 p27
 S'balanced'
